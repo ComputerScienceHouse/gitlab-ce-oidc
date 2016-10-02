@@ -1,0 +1,11 @@
+7c7,14
+<     define_method provider['name'] do
+---
+>     provider_name = provider['name']
+> 
+>     # Allow for multiple OpenID Connect providers
+>     if provider_name == 'openid_connect'
+>         provider_name = provider['args']['name']
+>     end
+> 
+>     define_method provider_name do
