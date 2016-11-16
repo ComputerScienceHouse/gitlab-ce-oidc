@@ -1,0 +1,10 @@
+--- user.rb	2016-11-15 23:47:04.000000000 -0500
++++ user-patched.rb	2016-11-15 23:52:36.000000000 -0500
+@@ -102,6 +102,7 @@
+         Gitlab::LDAP::Config.providers.each do |provider|
+           adapter = Gitlab::LDAP::Adapter.new(provider)
+           @ldap_person = Gitlab::LDAP::Person.find_by_uid(auth_hash.uid, adapter)
++          @ldap_person ||= Gitlab::LDAP::Person.find_by_uuid(auth_hash.uid, adapter)
+           break if @ldap_person
+         end
+         @ldap_person
