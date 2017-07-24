@@ -1,10 +1,11 @@
---- user.rb	2016-11-15 23:47:04.000000000 -0500
-+++ user-patched.rb	2016-11-15 23:52:36.000000000 -0500
-@@ -102,6 +102,7 @@
+--- user.rb	2017-07-21 23:41:41.000000000 -0700
++++ user-patched.rb	2017-07-23 23:14:55.000000000 -0700
+@@ -102,6 +102,8 @@
          Gitlab::LDAP::Config.providers.each do |provider|
            adapter = Gitlab::LDAP::Adapter.new(provider)
            @ldap_person = Gitlab::LDAP::Person.find_by_uid(auth_hash.uid, adapter)
++          # The `uid` might actually be a UUID. Try it next.
 +          @ldap_person ||= Gitlab::LDAP::Person.find_by_uuid(auth_hash.uid, adapter)
+           # The `uid` might actually be a DN. Try it next.
+           @ldap_person ||= Gitlab::LDAP::Person.find_by_dn(auth_hash.uid, adapter)
            break if @ldap_person
-         end
-         @ldap_person
