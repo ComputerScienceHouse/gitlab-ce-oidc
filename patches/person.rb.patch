@@ -1,6 +1,8 @@
---- person.rb	2016-11-15 23:47:23.000000000 -0500
-+++ person-patched.rb	2016-11-15 23:50:46.000000000 -0500
-@@ -8,6 +8,11 @@
+diff --git a/person.rb.orig b/person.rb
+index 4d6f8ac..1a2cb35 100644
+--- a/person.rb.orig
++++ b/person.rb
+@@ -8,6 +8,11 @@ module Gitlab
  
        attr_accessor :entry, :provider
  
