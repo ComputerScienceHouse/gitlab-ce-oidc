@@ -1,13 +1,10 @@
-diff --git a/user.rb.orig b/user.rb
-index 7704bf7..1315489 100644
---- a/user.rb.orig
-+++ b/user.rb
-@@ -109,6 +109,8 @@ module Gitlab
- 
+--- ./lib/gitlab/o_auth/user.rb
++++ ./lib/gitlab/o_auth/user-patched.rb
+@@ -119,6 +119,7 @@
+
        def find_ldap_person(auth_hash, adapter)
-         by_uid = Gitlab::LDAP::Person.find_by_uid(auth_hash.uid, adapter)
-+        # The `uid` might actually be a UUID. Try it next.
-+        by_uid || Gitlab::LDAP::Person.find_by_uuid(auth_hash.uid, adapter)
-         # The `uid` might actually be a DN. Try it next.
-         by_uid || Gitlab::LDAP::Person.find_by_dn(auth_hash.uid, adapter)
+         Gitlab::LDAP::Person.find_by_uid(auth_hash.uid, adapter) ||
++          Gitlab::LDAP::Person.find_by_uuid(auth_hash.uid, adapter) ||
+           Gitlab::LDAP::Person.find_by_email(auth_hash.uid, adapter) ||
+           Gitlab::LDAP::Person.find_by_dn(auth_hash.uid, adapter)
        end
