@@ -1,4 +1,4 @@
-FROM gitlab/gitlab-ce:11.3.6-ce.0
+FROM gitlab/gitlab-ce:11.9.0-ce.0
 MAINTAINER Computer Science House <rtp@csh.rit.edu>
 
 # Install the OpenID Connect strategy for OmniAuth
